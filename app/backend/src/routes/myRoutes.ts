@@ -14,7 +14,8 @@ router.get('/matches', MatchesController.getAll);
 router.post('/matches', MatchesController.createMatch);
 router.patch('/matches/:id', MatchesController.updateMatch);
 router.patch('/matches/:id/finish', MatchesController.finishMatch);
-router.get('/leaderboard/home', leadersBoardControl.getTeams);
-router.get('/leaderboard', leadersBoardControl.getTeamsGeneral);
+router.get('/leaderboard/home', leadersBoardControl.getLeaderboardHome);
+router.get('/leaderboard/away', leadersBoardControl.getLeaderboardAway);
+router.get('/leaderboard', leadersBoardControl.getLeaderboard);
 
 export default router;

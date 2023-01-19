@@ -64,7 +64,9 @@ export interface ILeadeboard {
   goalsFavor: number;
   goalsOwn: number;
   goalsBalance: number;
-  efficiency: number;
+  efficiency: number | string;
 }
+
+export type ILeader = Array<ILeadeboard>;
 
 export interface IMatchIndProg extends IMatchInd, IMatchProg { }
