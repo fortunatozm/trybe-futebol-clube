@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import MatchesService from '../services/matchesService';
 
 class MatchesController {
@@ -12,16 +12,24 @@ class MatchesController {
     res.status(200).json(matches);
   }
 
-  static async finishMatch(req: Request, res: Response) {
-    const { id } = req.params;
-    await MatchesService.finishMatch(+id);
-    res.status(200).json({ message: 'Finished' });
-  }
+  static finishMatch = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      await MatchesService.finishMatch(+id);
+      res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      next(error);
+    }
+  };
 
-  static async createMatch(req: Request, res: Response) {
-    const match = await MatchesService.createMatch(req.body);
-    res.status(201).json(match);
-  }
+  static createMatch = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const match = await MatchesService.createMatch(req.body);
+      res.status(201).json(match);
+    } catch (error) {
+      next(error);
+    }
+  };
 
   static async updateMatch(req: Request, res: Response) {
     const { id } = req.params;

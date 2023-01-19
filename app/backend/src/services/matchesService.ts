@@ -64,7 +64,7 @@ class MatchesService {
   static async createMatch(data: IMatch): Promise<IMatchIndProg> {
     const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = data;
     if (homeTeam === awayTeam) {
-      throw new ErrorCode('It is not possible to create a match with two equal teams', 401);
+      throw new ErrorCode('It is not possible to create a match with two equal teams', 422);
     }
     const hTeam = await Teams.findOne({ where: { id: homeTeam } });
     const aTeam = await Teams.findOne({ where: { id: awayTeam } });
