@@ -2,11 +2,9 @@ import ErrorCode from '../CodeError';
 import User from '../database/models/Users.model';
 
 class UsersService {
-  static async getOne(email: string, password: string) {
+  static async getOne(email: string) {
     const valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/g;
-    if (!password || !email) {
-      throw new ErrorCode('All fields must be filled', 400);
-    }
+    console.log(email, valid);
     if (!valid.test(email)) {
       throw new ErrorCode('Incorrect email or password', 401);
     }

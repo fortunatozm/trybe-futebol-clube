@@ -22,7 +22,10 @@ class UsersController {
   static login = async (req: Request, res: Response, next: NextFunction) => {
     const { email: mail, password } = req.body;
     try {
-      const user = await UsersService.getOne(mail, password);
+      if (!password || !mail) {
+        throw new ErrorCode('All fields must be filled', 400);
+      }
+      const user = await UsersService.getOne(mail);
       const pass = await bcrypt.compare(password, user.password);
       if (!pass) {
         throw new ErrorCode('Incorrect email or password', 401);
@@ -44,8 +47,7 @@ class UsersController {
       throw new ErrorCode(tokenMessage, 401);
     }
     const emaill = data.payload.data.email;
-    const passwordd = data.payload.data.email;
-    const exists = await UsersService.getOne(emaill, passwordd);
+    const exists = await UsersService.getOne(emaill);
     if (!exists) { throw new ErrorCode(tokenMessage, 401); }
     const { password, ...user } = exists;
     res.status(200).json({ role: user.role });

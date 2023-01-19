@@ -20,15 +20,15 @@ const tokenMiddleware = async (req: ReqUser, _res: Response, next: NextFunction)
     try { data = verify(token, secret, { complete: true }) as Jwt; } catch (e) {
       throw new ErrorCode(tokenMsg, 401);
     }
-    const mail = data.payload.email;
-    const passwordd = data.payload.data.password;
-    const exists = await usersServices.getOne(mail, passwordd);
+    const mail = data.payload.data.email;
+    const exists = await usersServices.getOne(mail);
     if (!exists) { throw new ErrorCode(tokenMsg, 401); }
     const { password, ...user } = exists;
     req.user = user;
   } catch (error) {
     next(error);
   }
+  next();
 };
 
 export default tokenMiddleware;
