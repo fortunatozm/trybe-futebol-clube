@@ -2,6 +2,7 @@ import { Router } from 'express';
 import UsersController from '../controller/usersController';
 import TeamsController from '../controller/teamsController';
 import MatchesController from '../controller/matchesController';
+import leadersBoardControl from '../controller/leadersBoardControl';
 
 const router = Router();
 
@@ -13,5 +14,7 @@ router.get('/matches', MatchesController.getAll);
 router.post('/matches', MatchesController.createMatch);
 router.patch('/matches/:id', MatchesController.updateMatch);
 router.patch('/matches/:id/finish', MatchesController.finishMatch);
+router.get('/leaderboard/home', leadersBoardControl.getTeams);
+router.get('/leaderboard', leadersBoardControl.getTeamsGeneral);
 
 export default router;
