@@ -22,7 +22,7 @@ export interface ReqUser extends Request {
   user?: IUserNoP;
 }
 
-export interface ITeam {
+export interface ITeams {
   id: number;
   teamName: string;
 }
