@@ -9,7 +9,6 @@ const router = Router();
 
 router.post('/login', UsersController.login);
 router.get('/login/validate', UsersController.validate);
-// router.use(Token);
 router.get('/teams', TeamsController.getAll);
 router.get('/teams/:id', TeamsController.getOne);
 router.get('/matches', MatchesController.getAll);
